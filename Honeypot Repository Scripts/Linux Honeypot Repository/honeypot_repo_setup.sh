@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This is a script to set up auditd and rsyslog on a Linux Honeypot Repository to monitor specific activities
+# and forward the logs to a specified SIEM server.
+# The script installs necessary packages, configures auditd rules, and sets up rsyslog
+# to forward logs to the SIEM server.
 # Usage: sudo ./setup_auditd_rsyslog.sh <SIEM_SERVER>
 
 # 1. Check for SIEM server argument
