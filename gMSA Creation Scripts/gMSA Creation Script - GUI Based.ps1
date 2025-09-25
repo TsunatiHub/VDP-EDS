@@ -6,7 +6,7 @@
 #1. Set Name Variables
 $Domain_FQDN = "Domain.com";                               # Fully Qualified Domain Name of the domain
 $GMSA_Group = "gMSA_Servers";                           # Name of the Global Security Group Created in AD
-$GMSA_Name = "gMDSA_Acct";                              # Name of the gMSA account to create !15 CHAR MAX!
+$GMSA_Name = "gMSA_Acct";                              # Name of the gMSA account to create !15 CHAR MAX!
 $GMSA_Desc = "GMSA Account/Group for $GMSA_Group";      # Description for the gMSA account
 
 #2. Create KDS Root Key (if not already created)
@@ -20,4 +20,5 @@ $GMSA_Server_IDs = $GMSA_Servers | ForEach-Object { (Get-ADComputer -Identity $_
 New-ADServiceAccount -Name $GMSA_Name -Enabled $true -Description $GMSA_Desc `
     -DisplayName $GMSA_Name -PrincipalsAllowedToRetrieveManagedPassword $GMSA_Server_IDs `
     -DNSHostName "$GMSA_Name.$Domain_FQDN";
+
 
