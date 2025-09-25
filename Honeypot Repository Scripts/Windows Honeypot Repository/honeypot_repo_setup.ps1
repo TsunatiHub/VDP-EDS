@@ -16,8 +16,11 @@ param(
 
 # 1. Enable Advanced Audit Policies
 Write-Host "Enabling Advanced Audit Policies..."
+# Audit File System: Logs attempts to access file system objects with configured SACL, Security Access Control Lists.
 auditpol /set /subcategory:"File System" /success:enable /failure:enable
+#Audit Handle Manipulation: Tracks when a handle or process to an object is opened or closed, useful for forensics. May cause high log volume.
 auditpol /set /subcategory:"Handle Manipulation" /success:enable /failure:enable
+#Audit Process Creation: Logs every process created on the system, including the name of both the application and user that started the process. 
 auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 
 # 2. Set SACLs on specified folder
@@ -27,8 +30,8 @@ if (-not (Test-Path $folder)) {
     New-Item -ItemType Directory -Path $folder | Out-Null
 }
 
-# Corrected way to combine permissions: remove the parentheses.
-# PowerShell's bitwise OR operator (-bor) will correctly combine the flags.
+# Set actions to audit in the SACL.
+# Audit Everyone for all actions beyond read.
 $everyonePerms = [System.Security.AccessControl.FileSystemRights]::Traverse `
     -bor [System.Security.AccessControl.FileSystemRights]::ExecuteFile `
     -bor [System.Security.AccessControl.FileSystemRights]::CreateFiles `
@@ -42,6 +45,7 @@ $everyonePerms = [System.Security.AccessControl.FileSystemRights]::Traverse `
     -bor [System.Security.AccessControl.FileSystemRights]::ChangePermissions `
     -bor [System.Security.AccessControl.FileSystemRights]::TakeOwnership
 
+# Audit Administrators for Delete actions.
 $adminPerms = [System.Security.AccessControl.FileSystemRights]::Delete `
     -bor [System.Security.AccessControl.FileSystemRights]::DeleteSubdirectoriesAndFiles
 
@@ -74,6 +78,7 @@ $adminRule = New-Object System.Security.AccessControl.FileSystemAuditRule (
 $acl.AddAuditRule($everyoneRule)
 $acl.AddAuditRule($adminRule)
 Set-Acl -Path $Folder -AclObject $acl
+
 
 
 
