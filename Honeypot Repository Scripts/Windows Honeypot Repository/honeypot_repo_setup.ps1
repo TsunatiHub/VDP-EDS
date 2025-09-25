@@ -20,7 +20,7 @@ auditpol /set /subcategory:"File System" /success:enable /failure:enable
 auditpol /set /subcategory:"Handle Manipulation" /success:enable /failure:enable
 auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 
-# 2. Set SACLs on R:\Backups
+# 2. Set SACLs on specified folder
 Write-Host "Configuring SACLs on $Folder..."
 if (-not (Test-Path $folder)) {
     Write-Host "Folder $Folder does not exist. Creating..."
@@ -74,6 +74,7 @@ $adminRule = New-Object System.Security.AccessControl.FileSystemAuditRule (
 $acl.AddAuditRule($everyoneRule)
 $acl.AddAuditRule($adminRule)
 Set-Acl -Path $Folder -AclObject $acl
+
 
 
 
