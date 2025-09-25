@@ -4,7 +4,7 @@
 .PARAMETER Folder
     The folder to set the SACLs on
 .EXAMPLE
-    .\honeypot_repo_setup.ps1 R:\backups
+    .\honeypot_repo_setup.ps1 <REPO_PATH>
 .NOTES
     - Run as Administrator.
 #>
@@ -78,6 +78,7 @@ $adminRule = New-Object System.Security.AccessControl.FileSystemAuditRule (
 $acl.AddAuditRule($everyoneRule)
 $acl.AddAuditRule($adminRule)
 Set-Acl -Path $Folder -AclObject $acl
+
 
 
 
