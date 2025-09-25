@@ -1,18 +1,17 @@
 <#
 .SYNOPSIS
     This is a script to set up a Windows Honeypot Repository using advanced audit policies, sets SACLs, and installs/configures Snare to forward Security logs to a SIEM via syslog (TCP/514).
-.PARAMETER SIEMServer
-    The SIEM server hostname or IP.
+.PARAMETER Folder
+    The folder to set the SACLs on
 .EXAMPLE
-    .\script.ps1 SIEMServer.domain.com
+    .\script.ps1 R:\backups
 .NOTES
     - Run as Administrator.
-    - Snare Community Edition is used (free for non-commercial use).
 #>
 
 param(
     [Parameter(Mandatory=$true)]
-    [string]$SIEMServer
+    [string]$Folder
 )
 
 # 1. Enable Advanced Audit Policies
@@ -22,10 +21,9 @@ auditpol /set /subcategory:"Handle Manipulation" /success:enable /failure:enable
 auditpol /set /subcategory:"Process Creation" /success:enable /failure:enable
 
 # 2. Set SACLs on R:\Backups
-Write-Host "Configuring SACLs on R:\Backups..."
-$folder = "R:\Backups"
+Write-Host "Configuring SACLs on $Folder..."
 if (-not (Test-Path $folder)) {
-    Write-Host "Folder $folder does not exist. Creating..."
+    Write-Host "Folder $Folder does not exist. Creating..."
     New-Item -ItemType Directory -Path $folder | Out-Null
 }
 
@@ -48,7 +46,7 @@ $adminPerms = [System.Security.AccessControl.FileSystemRights]::Delete `
     -bor [System.Security.AccessControl.FileSystemRights]::DeleteSubdirectoriesAndFiles
 
 # Get the ACL and clear existing audit rules
-$acl = Get-Acl -Path $folder
+$acl = Get-Acl -Path $Folder
 $acl.SetAuditRuleProtection($true, $false) # Protect from inheritance, remove existing
 
 # Everyone SACL: Success+Failure, applies to folder, subfolders, files
@@ -75,5 +73,6 @@ $adminRule = New-Object System.Security.AccessControl.FileSystemAuditRule (
 # Add the rules and apply the ACL
 $acl.AddAuditRule($everyoneRule)
 $acl.AddAuditRule($adminRule)
-Set-Acl -Path $folder -AclObject $acl
+Set-Acl -Path $Folder -AclObject $acl
+
 
