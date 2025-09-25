@@ -4,14 +4,15 @@
 # and forward the logs to a specified SIEM server.
 # The script installs necessary packages, configures auditd rules, and sets up rsyslog
 # to forward logs to the SIEM server.
-# Usage: sudo ./setup_auditd_rsyslog.sh <SIEM_SERVER>
+# Usage: sudo ./honeypot_repo_setup.sh <SIEM_SERVER> <REPO_PATH>
 
-# 1. Check for SIEM server argument
-if [ -z "$1" ]; then
-  echo "Usage: $0 <SIEM_SERVER>"
+# 1. Check for SIEM server and repository path arguments
+if [ -z "$1" ] || [ -z "$2" ]; then
+  echo "Usage: $0 <SIEM_SERVER> <REPO_PATH>"
   exit 1
 fi
 SIEM_SERVER="$1"
+REPO_PATH="$2"
 
 # 2. Install auditd and rsyslog
 echo "[*] Installing auditd and rsyslog..."
@@ -25,20 +26,18 @@ sudo tee /etc/audit/rules.d/audit.rules > /dev/null << EOF
 # /etc/audit/rules.d/audit.rules
 
 # Equivalent of Audit "File System"
-# This rule watches for all write, attribute, and delete operations on the main Veeam repository folder.
+# This rule watches for all write, attribute, and delete operations on the main repository folder.
 # Any access to this specific folder is likely malicious.
--w /mnt/Veeam_Repo/backups -p rwxa -k veeam_repo_access
+-w ${REPO_PATH} -p rwxa -k veeam_repo_access
 
 # This rule watches for any attempt to modify system binaries that an attacker might try to replace or manipulate.
 -w /etc/passwd -p wa -k user_account_change
 -w /etc/shadow -p wa -k user_account_change
 
-
 # Equivalent of "Audit Process Creation"
 # This rule will log all successful process executions.
 -a always,exit -F arch=b64 -S execve -k process_creation
 -a always,exit -F arch=b32 -S execve -k process_creation
-
 
 # Equivalent of "Audit Handle Manipulation"
 # Monitoring processes reading or writing the memory of another process.
@@ -79,4 +78,4 @@ EOF
 echo "[*] Restarting rsyslog..."
 sudo systemctl restart rsyslog
 
-echo "[*] Setup complete. Auditd and rsyslog are configured to forward logs to $SIEM_SERVER."
+echo "[*] Setup complete. Auditd and rsyslog are configured to forward logs to $SIEM_SERVER and monitor $REPO_PATH."
