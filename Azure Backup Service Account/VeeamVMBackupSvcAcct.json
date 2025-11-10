@@ -1,7 +1,7 @@
 {
   "Name": "VeeamVMBackupSvcAcct",
   "IsCustom": true,
-  "Description": "Least-privilege role for Veeam Backup for Microsoft Azure 8.1 to discover, back up, and restore Azure VMs in NATE-LAB-RG using worker instances.",
+  "Description": "Least-privilege role for Veeam Backup for Microsoft Azure 8.1 to discover, back up, and restore Azure VMs in <your-resource-group> using worker instances.",
   "Actions": [
     "Microsoft.Authorization/locks/delete",
     "Microsoft.Authorization/locks/read",
@@ -112,6 +112,6 @@
   ],
   "NotDataActions": [],
   "AssignableScopes": [
-    "/subscriptions/<your-subscription-id>/resourceGroups/NATE-LAB-RG"
+    "/subscriptions/<your-subscription-id>/resourceGroups/<your-resource-group>"
   ]
 }
