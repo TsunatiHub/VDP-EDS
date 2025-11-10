@@ -1,7 +1,7 @@
 {
   "properties": {
     "roleName": "VeeamVMBackupSvcAcct",
-    "description": "Least-privilege role for Veeam Backup for Microsoft Azure 8.1 to discover, back up, and restore Azure VMs in <your-resource-group> using worker instances.",
+    "description": "Least-privilege role for Veeam Backup for Microsoft Azure 8.1 to discover, back up, and restore Azure VMs in your-resource-group using worker instances.",
     "type": "CustomRole",
     "assignableScopes": [],
     "permissions": [
