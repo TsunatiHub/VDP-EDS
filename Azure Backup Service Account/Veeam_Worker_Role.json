@@ -1,7 +1,8 @@
 {
     "properties": {
-        "roleName": "Veeam Service Account DEMO_WORKER (3edbf9bf-dbc9-4a4f-a0d8-c5eaed1d8015/e19h6j)",
-        "description": "Allows specific functionality for Veeam Backup for Azure",
+        "roleName": "VeeamBackup_Worker_Role",
+        "description": "Allows specific Worker Role functionality for Veeam Backup for Azure",
+        "assignableScopes": [],
         "permissions": [
             {
                 "actions": [
@@ -100,4 +101,5 @@
             }
         ]
     }
+
 }
