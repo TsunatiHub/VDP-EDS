@@ -1,0 +1,52 @@
+{
+    "properties": {
+        "roleName": "Veeam Service Account DEMO_REPO (1f26a7ce-6589-437f-acc1-f3c3a03a20e2/gma1wz)",
+        "description": "Allows specific functionality for Veeam Backup for Azure",
+        "permissions": [
+            {
+                "actions": [
+                    "Microsoft.Authorization/roleAssignments/read",
+                    "Microsoft.Resources/subscriptions/resourceGroups/read",
+                    "Microsoft.Storage/storageAccounts/read",
+                    "Microsoft.Storage/storageAccounts/listKeys/action",
+                    "Microsoft.Storage/storageAccounts/blobServices/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/write",
+                    "Microsoft.Insights/eventtypes/values/Read",
+                    "Microsoft.Storage/storageAccounts/blobServices/generateUserDelegationKey/action",
+                    "Microsoft.KeyVault/vaults/read",
+                    "Microsoft.KeyVault/vaults/keys/versions/read",
+                    "Microsoft.KeyVault/vaults/deploy/action",
+                    "Microsoft.Insights/MetricDefinitions/Read",
+                    "Microsoft.Insights/Metrics/Read",
+                    "Microsoft.Network/privateEndpoints/read",
+                    "Microsoft.Network/privateEndpoints/write",
+                    "Microsoft.Network/privateEndpoints/delete",
+                    "Microsoft.Network/privateLinkServices/privateEndpointConnections/read",
+                    "Microsoft.Network/privateLinkServices/privateEndpointConnections/write",
+                    "Microsoft.Network/privateLinkServices/privateEndpointConnections/delete",
+                    "Microsoft.Storage/storageAccounts/PrivateEndpointConnectionsApproval/action",
+                    "Microsoft.Storage/storageAccounts/privateEndpointConnections/write",
+                    "Microsoft.Compute/diskAccesses/PrivateEndpointConnectionsApproval/action",
+                    "Microsoft.Compute/diskAccesses/privateEndpointConnections/read",
+                    "Microsoft.Compute/diskAccesses/privateEndpointConnections/write",
+                    "Microsoft.Compute/diskAccesses/read",
+                    "Microsoft.Compute/diskAccesses/write",
+                    "Microsoft.Compute/diskAccesses/delete",
+                    "Microsoft.Network/virtualNetworks/subnets/joinViaServiceEndpoint/action"
+                ],
+                "notActions": [],
+                "dataActions": [
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/write",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/delete",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read",
+                    "Microsoft.Storage/storageAccounts/blobServices/containers/blobs/add/action",
+                    "Microsoft.KeyVault/vaults/keys/read",
+                    "Microsoft.KeyVault/vaults/keys/encrypt/action",
+                    "Microsoft.KeyVault/vaults/keys/decrypt/action"
+                ],
+                "notDataActions": []
+            }
+        ]
+    }
+}
