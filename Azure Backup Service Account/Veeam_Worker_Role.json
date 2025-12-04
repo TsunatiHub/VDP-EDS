@@ -1,7 +1,7 @@
 {
     "properties": {
         "roleName": "VeeamBackup_Worker_Role",
-        "description": "Allows specific Worker Role functionality for Veeam Backup for Azure",
+        "description": "Allows Worker Management functionality for Veeam Backup for Azure",
         "assignableScopes": [],
         "permissions": [
             {
@@ -103,3 +103,4 @@
     }
 
 }
+
