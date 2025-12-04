@@ -1,7 +1,8 @@
 {
     "properties": {
-        "roleName": "Veeam Service Account DEMO_REPO (1f26a7ce-6589-437f-acc1-f3c3a03a20e2/gma1wz)",
-        "description": "Allows specific functionality for Veeam Backup for Azure",
+        "roleName": "Veeam_Repo_Role",
+        "description": "Allows Repo Management functionality for Veeam Backup for Azure",
+        "assignableScopes": [],
         "permissions": [
             {
                 "actions": [
@@ -49,4 +50,5 @@
             }
         ]
     }
+
 }
