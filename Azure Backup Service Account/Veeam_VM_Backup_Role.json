@@ -1,7 +1,8 @@
 {
     "properties": {
-        "roleName": "Veeam Service Account DEMO_VM_BACKUP (1422a1a9-8ffa-4671-91a3-a85684e901b7/zrra2y)",
-        "description": "Allows specific functionality for Veeam Backup for Azure",
+        "roleName": "VeeamBackup_VM_Backup_Role",
+        "description": "Allows Azure VM Backup and Restore functionality for Veeam Backup for Azure",
+        "assignableScopes": [],
         "permissions": [
             {
                 "actions": [
@@ -74,4 +75,5 @@
             }
         ]
     }
+
 }
