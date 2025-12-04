@@ -1,6 +1,6 @@
 {
     "properties": {
-        "roleName": "Veeam_Repo_Role",
+        "roleName": "VeeamBackup_Repo_Role",
         "description": "Allows Repo Management functionality for Veeam Backup for Azure",
         "assignableScopes": [],
         "permissions": [
@@ -52,3 +52,4 @@
     }
 
 }
+
